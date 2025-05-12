@@ -1,0 +1,34 @@
+
+Old Quartus:
+    $env:QUARTUS_ROOTDIR_OVERRIDE = "D:\quartus\devices_support\quartus"
+New Quartus:
+    $env:QUARTUS_ROOTDIR_OVERRIDE = "D:\intelFPGA_pro\24.1\quartus"
+ModelSim License:
+    $env:LM_LICENSE_FILE = "D:\modelsim\LR-228392_License.dat"
+
+Emulation:
+    icpx -fsycl -fintelfpga -DFPGA_EMULATOR .\template-buffers.cpp -o emu-template-buffers.exe
+Reports:
+    icpx -fintelfpga -DFPGA_HARDWARE .\template-buffers.cpp -Xshardware -fsycl-link=early -Xstarget=CycloneV -o reports-template-buffers.a
+Simulation:
+    icpx -fintelfpga -DFPGA_SIMULATOR .\template-buffers.cpp -Xssimulation -Xstarget=CycloneV -Xsghdl -o sim-template-buffers.fpga_sim.exe
+    icpx -fintelfpga -DFPGA_SIMULATOR .\template-buffers.cpp -Xssimulation -Xstarget=Agilex7 -Xsghdl -o sim-template-buffers.fpga_sim.exe
+
+$env:QUARTUS_ROOTDIR_OVERRIDE = "D:\intelFPGA_pro\24.1\quartus"
+$env:LM_LICENSE_FILE = "D:\modelsim\LR-228392_License.dat"
+icpx -fintelfpga -DFPGA_SIMULATOR .\template-buffers.cpp -Xssimulation -Xstarget=Agilex7 -Xsghdl -o sim-template-buffers.fpga_sim.exe
+
+$env:QUARTUS_ROOTDIR_OVERRIDE = "D:\quartus\devices_support\quartus"
+$env:LM_LICENSE_FILE = "D:\modelsim\LR-228392_License.dat"
+icpx -fintelfpga -DFPGA_SIMULATOR .\template-buffers.cpp -Xssimulation -Xstarget=CycloneV -Xsghdl -o sim-template-buffers.fpga_sim.exe
+
+Compilation:
+    icpx -fintelfpga -DFPGA_HARDWARE .\template-buffers.cpp -Xshardware -Xstarget=CycloneV -o vector_add.fpga
+
+
+for the other new vector_add:
+    $env:QUARTUS_ROOTDIR_OVERRIDE = "D:\intelFPGA_pro\24.1\quartus"
+    icpx -fsycl -fintelfpga -Xssimulation -Xsghdl=0 .\vector_add.cpp
+---------------------------------------------------------------------------------------------------------------------------------------------
+    $env:QUARTUS_ROOTDIR_OVERRIDE = "D:\quartus\devices_support\quartus"
+    icpx -fsycl -fintelfpga -Xssimulation -Xsghdl=0 -Xstarget=CycloneV .\vector_add.cpp
